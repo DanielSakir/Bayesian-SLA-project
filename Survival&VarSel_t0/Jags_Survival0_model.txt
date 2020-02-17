@@ -1,0 +1,47 @@
+model {
+  
+  for(i in 1:n){
+
+    mu[i] <- beta0 + inprod(X_st[i,], beta_st_sel) + inprod(X_d[i,], beta_d_sel)    
+    lambda[i] <- log(2) * exp(-mu[i]*alpha)
+    t[i] ~ dweib(alpha, lambda[i])T(0,)
+    censored[i] ~ dinterval(t[i], cens[i])
+  }
+  
+  # tracing the visited model
+  for (j in 1:p){
+	  TempIndicator[j]<- g[j] * pow(2, j) 
+  }
+  mdl<- 1 + sum(TempIndicator[]) # model index in binary coding
+
+
+
+  for(j in 1:p_st){
+    beta_st[j] ~ dnorm(0, 0.001)
+  }
+
+  for(j in 1:p_d){
+    beta_d[j] ~ dnorm(0, 0.001)
+  }
+  
+  beta0 ~ dnorm(0, 0.001)
+  
+  for(j in 1:p){
+    tprior[j] <- 1/var_beta[j]
+    bprior[j] <- 0
+    beta_temp[j] ~ dnorm(bprior[j], tprior[j])
+    g[j] ~ dbern(theta[j])
+    theta[j] ~ dunif(0,1)
+  }
+
+  for(j in 1:p_st){
+    beta_st_sel[j] <- g[j] * beta_temp[j]
+  }
+
+  for(j in 1:p_d){
+    beta_d_sel[j] <- g[j + p_st] * beta_temp[j + p_st]
+  }
+
+  alpha ~ dunif(0,10)
+  
+}
