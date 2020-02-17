@@ -1,20 +1,22 @@
 Data was obtained by The Pooled Resource Open-Access ALS Clinical Trials (PRO-ACT), which includesinformation from over 8500 ALS patients who participated in different industry clinical trials and representsthe largest aggregation of ALS clinical trial data available. For this reason it is very heterogeneous with manymissing values.
  Each subject is identified by a SubjectID and thespecific assessment for this subject is identified by a record (each subject has multiple records). The assessmentsare separated into 14 different files according to type. It includes information about the patience background(like age, sex or race), his family neurological diseases, his weight and height, treatments, respiratory data,symptoms, laboratory tests and vital parameters. There is also a file with death information, and another oneabout a test periodically filled in by the patience. Some of those files are time varying.For each dataset, the time at which an assessment was taken (a record was created) is listed as the assessment’sdelta. Delta is given as days since the trial onset, with the trial onset referred to as Time 0. A negative deltalists events occurring before the official beginning of the trial.
 
- Demographics
- Demographic information is available in the Demographics file including for each subject the Age, the timewhen the age was measured (Demographics_Delta, typically Time 0; for some patients age was measuredat different times, maximum 35 days before the start of the trial).  For some patients the Date_of_Birthis available, measured as the number of days from Demographics_Delta (negative values). Also informationavailable about Ethnicity (available for a subset of cases and distinguishing between “non hispanico or latino”or “hispanico or latino”), Race (Americ_Indian_Alaska_Native, Asian, Black_African_American, Hawai-ian_Pacific_Islander, Unknown, Caucasian – the most frequent race – and Other, specified in Other_Specify),and Gender.
- Age has been calculated where missing using Birth when available. Dummy columns for the Races have beencreated.
+Demographics
+Demographic information is available in the Demographics file including for each subject the Age, the timewhen the age was measured
+(Demographics_Delta, typically Time 0; for some patients age was measuredat different times, maximum 35 days before the start of the trial).  For some patients the Date_of_Birthis available, measured as the number of days from Demographics_Delta (negative values). Also informationavailable about Ethnicity (available for a subset of cases and distinguishing between “non hispanico or latino”or “hispanico or latino”), Race (Americ_Indian_Alaska_Native, Asian, Black_African_American, Hawai-ian_Pacific_Islander, Unknown, Caucasian – the most frequent race – and Other, specified in Other_Specify),and Gender.
+Age has been calculated where missing using Birth when available. Dummy columns for the Races have beencreated.
 
- LS History Subject Symptoms
+ALS History Subject Symptoms
 In the file Subject ALS History there are: Symptom, Symptom Other: Specify, and Location.
 
-LS History Subject Site
+ALS History Subject Site
 The site of disease onset as experienced by the patient can be a limb (“limb onset”) or the muscles control-ling speaking and swallowing (“bulbar onset”) or occasionally both.
 Onset_Site dummy variables have been created.
 
 Amyotrophic Lateral Sclerosis Functional Rating Score (ALS-FRS)
 Symptom severity is frequently assessed using two functional scales: ALSFRS (ALS Functional Rating Scale)and its modified version ALSFRS-R.
-he ALSFRS scale is a list of 10 assessments regard-ing motor function, with each measure ranging from 0 to 4, with 4 being the highest (normal function) and0 being no function.
+he ALSFRS scale is a list of 10 assessments regard-ing motor function, with each measure ranging from 0 to 4, with 4 being the highest
+(normal function) and0 being no function.
 ALSFRS-R is a modified version of the ALSFRS. Whereas in the ALSFRS there are 10 assessments, in theALSFRS-R one of the assessments, Q10 (respiratory function) was further divided into three questions (Dysp-nea, Orthopnea, Respiratory Insufficiency) to better reflect the importance (weighting) of respiratory changeswithin the scale.
 Q10 score has been calculated where missing as the mean of R1, R2 and R3 scores when available; every scorehas been shifted from 0-4 to 1-5, setting to 0 all of missing values; finally Total scores have been recalculated.
 
